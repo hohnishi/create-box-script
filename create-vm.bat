@@ -13,7 +13,7 @@ set VAGRANT=C:\HashiCorp\Vagrant\bin\vagrant.exe
 
 REM VM settings
 set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
-set VMNAME=OL76base
+set VMNAME=OL76base2
 REM set OSTYPE=RedHat_64
 set OSTYPE=Oracle_64
 set MEMSIZE=512

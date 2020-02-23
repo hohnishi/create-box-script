@@ -1,7 +1,0 @@
-[ol7-dvd]
-name=Oracle Linux 7.6 - x86_64 - DVD
-baseurl=file:///media/cdrom/
-enabled=1
-gpgcheck=1
-gpgkey=file:///media/cdrom/RPM-GPG-KEY-oracle
-
