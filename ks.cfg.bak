@@ -1,0 +1,65 @@
+#version=DEVEL
+# System authorization information
+auth --enableshadow --passalgo=sha512
+repo --name="Server-HighAvailability" --baseurl=file:///run/install/repo/addons/HighAvailability
+repo --name="Server-ResilientStorage" --baseurl=file:///run/install/repo/addons/ResilientStorage
+# Use CDROM installation media
+cdrom
+# Use graphical install
+#graphical
+text
+skipx
+# Run the Setup Agent on first boot
+firstboot --enable
+ignoredisk --only-use=sda
+# Keyboard layouts
+keyboard --vckeymap=jp --xlayouts='jp'
+# System language
+lang ja_JP.UTF-8
+
+# Network information
+network  --bootproto=dhcp --device=enp0s3 --ipv6=auto --activate
+network  --hostname=localhost.localdomain
+
+# Root password
+rootpw --iscrypted $6$N/QLn.8fyCov2a1/$16UxtwBTE2xxQJnIsvL9ni7DS9Iwwf3Olv2gmtErwObkth/G8wkp.M2fnghB19gWZGinI7Nv8zhUOqmiAuROH1
+# System services
+services --enabled="chronyd"
+# System timezone
+timezone Asia/Tokyo --isUtc
+user --groups=wheel --name=vagrant --password=$6$t361P.zjsUIBkcyA$dYYueE/qbVa6pw3cn5iUkN27lRaaSZd52rSjVip8Ij2A6HaWZ7gfeTNWB8Y/cC0Wiahel7iH/iukLYLxsYpZl. --iscrypted --uid=30000 --gecos="vagrant" --gid=30000
+# System bootloader configuration
+bootloader --append=" crashkernel=auto" --location=mbr --boot-drive=sda
+#autopart --type=lvm
+autopart --type=lvm --nohome
+# Partition clearing information
+clearpart --none --initlabel
+
+%packages
+@^minimal
+@core
+chrony
+kexec-tools
+# for yum repository operations
+yum-utils
+# for install guest additions
+make
+gcc
+kernel-headers
+kernel-devel
+perl
+bzip2
+
+%end
+
+%addon com_redhat_kdump --enable --reserve-mb='auto'
+
+%end
+
+%anaconda
+pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+%end
+###
+reboot --eject
