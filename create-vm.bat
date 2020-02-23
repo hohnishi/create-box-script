@@ -8,10 +8,10 @@ REM envirenment settings
 set VBOXBIN=C:\Program Files\Oracle\VirtualBox
 set VBOXMANAGE="%VBOXBIN%\VBoxManage.exe"
 set VBOXVMBASE=C:\VirtualBox VMs
-set ISOBASE=C:\Users\Hajim\Documents\ISO\OL
+set ISOBASE=C:\Users\Hajim\Documents\ISO
 
 REM VM settings
-set OSIMAGE=%ISOBASE%\OL76_V980739-01.iso
+set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
 set VMNAME=OL76base
 REM set OSTYPE=RedHat_64
 set OSTYPE=Oracle_64
