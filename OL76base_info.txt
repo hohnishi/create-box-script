@@ -1,11 +1,11 @@
 Name:                        OL76base
 Groups:                      /
 Guest OS:                    Oracle (64-bit)
-UUID:                        f3c82630-c8f7-47f4-be8c-211a81c561a9
+UUID:                        0e05ec14-fee4-4b94-922f-b306e658586a
 Config file:                 C:\VirtualBox VMs\OL76base\OL76base.vbox
 Snapshot folder:             C:\VirtualBox VMs\OL76base\Snapshots
 Log folder:                  C:\VirtualBox VMs\OL76base\Logs
-Hardware UUID:               f3c82630-c8f7-47f4-be8c-211a81c561a9
+Hardware UUID:               0e05ec14-fee4-4b94-922f-b306e658586a
 Memory size                  512MB
 Page Fusion:                 disabled
 VRAM size:                   8MB
@@ -40,7 +40,7 @@ VT-x VPID:                   enabled
 VT-x unr. exec.:             enabled
 Paravirt. Provider:          Default
 Effective Paravirt. Prov.:   KVM
-State:                       powered off (since 2020-02-23T01:22:29.666000000)
+State:                       powered off (since 2020-02-23T01:30:04.874000000)
 Graphics Controller:         VBoxVGA
 Monitor count:               1
 3D Acceleration:             disabled
@@ -67,9 +67,9 @@ Storage Controller Instance Number (1): 0
 Storage Controller Max Port Count (1):  2
 Storage Controller Port Count (1):      2
 Storage Controller Bootable (1):        on
-SATA (0, 0): C:\VirtualBox VMs\OL76base\OL76base.vdi (UUID: d184df01-f127-4e3c-9a00-41a327c6f284)
+SATA (0, 0): C:\VirtualBox VMs\OL76base\OL76base.vdi (UUID: 5dbe06e4-c093-4887-898c-bb8bac442a5c)
 IDE (1, 0): Empty
-NIC 1:                       MAC: 0800278C0277, Attachment: NAT, Cable connected: on, Trace: off (file: none), Type: 82540EM, Reported speed: 0 Mbps, Boot priority: 0, Promisc Policy: deny, Bandwidth group: none
+NIC 1:                       MAC: 080027B2698B, Attachment: NAT, Cable connected: on, Trace: off (file: none), Type: 82540EM, Reported speed: 0 Mbps, Boot priority: 0, Promisc Policy: deny, Bandwidth group: none
 NIC 1 Settings:  MTU: 0, Socket (send: 64, receive: 64), TCP Window (send:64, receive: 64)
 NIC 1 Rule(0):   name = Rule 1, protocol = tcp, host ip = 127.0.0.1, host port = 2222, guest ip = , guest port = 22
 NIC 2:                       disabled
