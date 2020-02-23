@@ -9,6 +9,7 @@ set VBOXBIN=C:\Program Files\Oracle\VirtualBox
 set VBOXMANAGE="%VBOXBIN%\VBoxManage.exe"
 set VBOXVMBASE=C:\VirtualBox VMs
 set ISOBASE=C:\Users\Hajim\Documents\ISO
+set VAGRANT=C:\HashiCorp\Vagrant\bin\vagrant.exe
 
 REM VM settings
 set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
@@ -52,11 +53,17 @@ if "%1"=="" (
 ) else if "%1"=="delhostonly" (
    call :delhostonly
    %exit% !ERRORLEVEL!
+) else if "%1"=="vmshutdown" (
+   call :vmshutdown
+   %exit% !ERRORLEVEL!
+) else if "%1"=="createpkg" (
+   call :createpkg
+   %exit% !ERRORLEVEL!
 )
 
 REM ###############################################
 :usage
-	echo "Usage: %cmdname% createvm|showvm|showvm2|eject|additions|osimage|addhostonly|delhostonly"
+	echo "Usage: %cmdname% createvm|showvm|showvm2|eject|additions|osimage|addhostonly|delhostonly|vmshutdown|createpkg"
 	%exit%
 
 REM ###############################################
@@ -145,6 +152,18 @@ REM ###############################################
 REM # delete host only network I/F
 :delhostonly
 	%VBOXMANAGE% modifyvm "%VMNAME%" --nic4 none
+	%exit%
+
+REM ###############################################
+REM # vm shutdown
+:vmshutdown
+	%VBOXMANAGE% controlvm "%VMNAME%" acpipowerbutton
+	%exit%
+
+REM ###############################################
+REM # cretate vagrant package
+:createpkg
+	%VAGRANT% package --base "%VMNAME%"
 	%exit%
 
 REM ## EOF
