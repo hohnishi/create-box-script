@@ -14,7 +14,7 @@ set SSHOPT=-o StrictHostKeyChecking=no -o UserKnownHostsFile=NUL
 
 REM VM settings
 set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
-set VMNAME=OL76base3
+set VMNAME=OL76base
 REM set OSTYPE=RedHat_64
 set OSTYPE=Oracle_64
 set MEMSIZE=512
