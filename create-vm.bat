@@ -45,14 +45,8 @@ if "%1"=="" (
 ) else if "%1"=="osimage" (
    call :osimage
    %exit% !ERRORLEVEL!
-) else if "%1"=="startvm" (
-   call :startvm
-   %exit% !ERRORLEVEL!
-) else if "%1"=="addhostonly" (
-   call :addhostonly
-   %exit% !ERRORLEVEL!
-) else if "%1"=="delhostonly" (
-   call :delhostonly
+) else if "%1"=="vmstart" (
+   call :vmstart
    %exit% !ERRORLEVEL!
 ) else if "%1"=="vmshutdown" (
    call :vmshutdown
@@ -64,7 +58,7 @@ if "%1"=="" (
 
 REM ###############################################
 :usage
-	echo "Usage: %cmdname% createvm|showvm|showvm2|eject|additions|osimage|addhostonly|delhostonly|vmshutdown|createpkg"
+	echo "Usage: %cmdname% createvm|showvm|showvm2|eject|additions|osimage|vmstart|vmshutdown|createpkg"
 	%exit%
 
 REM ###############################################
@@ -74,11 +68,12 @@ REM ###############################################
 	call :showvm  > %VMNAME%_info.txt
 	call :osimage
 	start httpserver.exe
-	call :startvm
+	call :vmstart
 	echo select "Install XXXXX" and TAB
 	echo add to boot option
 ::	echo "inst.ks=http://192.168.56.1:8080/ks.cfg"
 	echo inst.ks=http://10.0.2.2:8080/ks.cfg
+	echo pause until OS bootup
 	pause
 	call :additions
 	ssh %SSHOPT% -p 2222 vagrant@localhost "sudo mount /dev/sr0 /mnt ; sudo /mnt/VBoxLinuxAdditions.run ; sudo umount /mnt"
@@ -137,22 +132,8 @@ REM # set OS image CD
 
 REM ###############################################
 REM # start VM
-:startvm
+:vmstart
 	%VBOXMANAGE% startvm "%VMNAME%"
-	%exit%
-
-REM ###############################################
-REM # add host only network I/F
-:addhostonly
-::	%VBOXMANAGE% addhostonly create --hostonlyadapter4 vboxnetX
-	%VBOXMANAGE% modifyvm "%VMNAME%" --hostonlyadapter4 "VirtualBox Host-Only Ethernet Adapter"
-	%VBOXMANAGE% modifyvm "%VMNAME%" --nic4 hostonly
-	%exit%
-
-REM ###############################################
-REM # delete host only network I/F
-:delhostonly
-	%VBOXMANAGE% modifyvm "%VMNAME%" --nic4 none
 	%exit%
 
 REM ###############################################
