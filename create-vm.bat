@@ -72,7 +72,6 @@ REM ###############################################
 	call :createvm
 	call :showvm  > %VMNAME%_info.txt
 	call :osimage
-::	call :addhostonly
 	start httpserver.exe
 	call :startvm
 	echo select "Install XXXXX" and TAB
@@ -80,7 +79,9 @@ REM ###############################################
 ::	echo "inst.ks=http://192.168.56.1:8080/ks.cfg"
 	echo inst.ks=http://10.0.2.2:8080/ks.cfg
 	pause
-::	call :eject
+	call :additions
+	ssh -p 2222 vagrant@localhost sudo mount /dev/sr0 /mnt
+	ssh -p 2222 vagrant@localhost "cd /mnt && sudo ./VBoxLinuxAdditions.run"
 	time /T
 	%exit%
 
