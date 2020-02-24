@@ -10,6 +10,7 @@ set VBOXMANAGE="%VBOXBIN%\VBoxManage.exe"
 set VBOXVMBASE=C:\VirtualBox VMs
 set ISOBASE=C:\Users\Hajim\Documents\ISO
 set VAGRANT=C:\HashiCorp\Vagrant\bin\vagrant.exe
+set SSHOPT=-o StrictHostKeyChecking=no -o UserKnownHostsFile=KnownHosts.txt
 
 REM VM settings
 set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
@@ -80,8 +81,7 @@ REM ###############################################
 	echo inst.ks=http://10.0.2.2:8080/ks.cfg
 	pause
 	call :additions
-	ssh -p 2222 vagrant@localhost sudo mount /dev/sr0 /mnt
-	ssh -p 2222 vagrant@localhost "cd /mnt && sudo ./VBoxLinuxAdditions.run"
+	ssh %SSHOPT% -p 2222 vagrant@localhost "sudo mount /dev/sr0 /mnt ; sudo /mnt/VBoxLinuxAdditions.run ; sudo umount /mnt"
 	time /T
 	%exit%
 
