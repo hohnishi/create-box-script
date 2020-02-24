@@ -14,7 +14,7 @@ set SSHOPT=-o StrictHostKeyChecking=no -o UserKnownHostsFile=NUL
 
 REM VM settings
 set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
-set VMNAME=OL76base2
+set VMNAME=OL76base3
 REM set OSTYPE=RedHat_64
 set OSTYPE=Oracle_64
 set MEMSIZE=512
@@ -86,18 +86,20 @@ REM # create VM from scratch
 	:: # VM
 	%VBOXMANAGE% createvm --name "%VMNAME%" --register
 	%VBOXMANAGE% modifyvm "%VMNAME%" --ostype "%OSTYPE%"
+	%VBOXMANAGE% modifyvm "%VMNAME%" --x2apic on
+	%VBOXMANAGE% modifyvm "%VMNAME%" --rtcuseutc  on
 	%VBOXMANAGE% modifyvm "%VMNAME%" --memory "%MEMSIZE%"
 	%VBOXMANAGE% modifyvm "%VMNAME%" --nic1 nat
 	%VBOXMANAGE% modifyvm "%VMNAME%" --natpf1 "Rule 1,tcp,127.0.0.1,2222,,22"
 	%VBOXMANAGE% modifyvm "%VMNAME%" --audio none
 	%VBOXMANAGE% modifyvm "%VMNAME%" --usb off
+	:: # DVD Drive
+	%VBOXMANAGE% storagectl    "%VMNAME%" --name "IDE" --add ide
+	%VBOXMANAGE% storageattach "%VMNAME%" --storagectl "IDE" --type dvddrive --port 1 --device 0 --medium emptydrive
 	:: # HDD
 	%VBOXMANAGE% createmedium disk --filename "%VDIPATH%" --size %VDISIZE% --format VDI
 	%VBOXMANAGE% storagectl    "%VMNAME%" --name "SATA" --add sata
 	%VBOXMANAGE% storageattach "%VMNAME%" --storagectl "SATA" --type hdd     --port 0 --device 0 --medium "%VDIPATH%"
-	:: # DVD Drive
-	%VBOXMANAGE% storagectl    "%VMNAME%" --name "IDE" --add ide
-	%VBOXMANAGE% storageattach "%VMNAME%" --storagectl "IDE" --type dvddrive --port 1 --device 0 --medium emptydrive
 	%exit%
 
 REM ###############################################
