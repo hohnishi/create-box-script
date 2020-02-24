@@ -10,7 +10,7 @@ set VBOXMANAGE="%VBOXBIN%\VBoxManage.exe"
 set VBOXVMBASE=C:\VirtualBox VMs
 set ISOBASE=C:\Users\Hajim\Documents\ISO
 set VAGRANT=C:\HashiCorp\Vagrant\bin\vagrant.exe
-set SSHOPT=-o StrictHostKeyChecking=no -o UserKnownHostsFile=KnownHosts.txt
+set SSHOPT=-o StrictHostKeyChecking=no -o UserKnownHostsFile=NUL
 
 REM VM settings
 set OSIMAGE=%ISOBASE%\OL\OL76_V980739-01.iso
