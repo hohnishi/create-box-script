@@ -73,7 +73,7 @@ REM ###############################################
 	echo add to boot option
 ::	echo "inst.ks=http://192.168.56.1:8080/ks.cfg"
 	echo inst.ks=http://10.0.2.2:8080/ks.cfg
-	echo pause until OS bootup
+	echo wait until OS bootup
 	pause
 	call :additions
 	ssh %SSHOPT% -p 2222 vagrant@localhost "sudo mount /dev/sr0 /mnt ; sudo /mnt/VBoxLinuxAdditions.run ; sudo umount /mnt"
@@ -98,7 +98,7 @@ REM # create VM from scratch
 	%VBOXMANAGE% storageattach "%VMNAME%" --storagectl "IDE" --type dvddrive --port 1 --device 0 --medium emptydrive
 	:: # HDD
 	%VBOXMANAGE% createmedium disk --filename "%VDIPATH%" --size %VDISIZE% --format VDI
-	%VBOXMANAGE% storagectl    "%VMNAME%" --name "SATA" --add sata
+	%VBOXMANAGE% storagectl    "%VMNAME%" --name "SATA" --add sata --portcount 1
 	%VBOXMANAGE% storageattach "%VMNAME%" --storagectl "SATA" --type hdd     --port 0 --device 0 --medium "%VDIPATH%"
 	%exit%
 
