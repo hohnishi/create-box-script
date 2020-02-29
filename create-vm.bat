@@ -165,7 +165,7 @@ REM ###############################################
 REM # add vagrant box
 :addbox
 	%VAGRANT% box list
-	%VAGRANT% box add "%VMNAME%.box" --name "%VMNAME%"
+	%VAGRANT% box add "%VMNAME%.box" --name "private/%VMNAME%"
 	%VAGRANT% box list
 	%exit%
 
