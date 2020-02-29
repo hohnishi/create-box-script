@@ -72,14 +72,22 @@ REM ###############################################
 	call :osimage
 	start httpserver.exe
 	call :vmstart
+	time /T
 	echo select "Install XXXXX" and TAB
 	echo add to boot option
 ::	echo "inst.ks=http://192.168.56.1:8080/ks.cfg"
 	echo inst.ks=http://10.0.2.2:8080/ks.cfg
 	echo wait until OS bootup
 	pause
+	time /T
 	call :additions
 	ssh %SSHOPT% -p 2222 vagrant@localhost "sudo mount /dev/sr0 /mnt ; sudo /mnt/VBoxLinuxAdditions.run ; sudo umount /mnt"
+	time /T
+	echo create and add box
+	pause
+	time /T
+	call :createpkg
+	call :addbox
 	time /T
 	%exit%
 
@@ -150,13 +158,15 @@ REM # vm shutdown
 REM ###############################################
 REM # cretate vagrant package
 :createpkg
-	%VAGRANT% package --base "%VMNAME%"
+	%VAGRANT% package --base "%VMNAME%" --output "%VMNAME%.box"
 	%exit%
 
 REM ###############################################
 REM # add vagrant box
 :addbox
-	%VAGRANT% box add package.box --name "%VMNAME%"
+	%VAGRANT% box list
+	%VAGRANT% box add "%VMNAME%.box" --name "%VMNAME%"
+	%VAGRANT% box list
 	%exit%
 
 REM ## EOF
