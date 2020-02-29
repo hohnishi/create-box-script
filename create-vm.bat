@@ -54,11 +54,14 @@ if "%1"=="" (
 ) else if "%1"=="createpkg" (
    call :createpkg
    %exit% !ERRORLEVEL!
+) else if "%1"=="addbox" (
+   call :addbox
+   %exit% !ERRORLEVEL!
 )
 
 REM ###############################################
 :usage
-	echo "Usage: %cmdname% createvm|showvm|showvm2|eject|additions|osimage|vmstart|vmshutdown|createpkg"
+	echo "Usage: %cmdname% createvm|showvm|showvm2|eject|additions|osimage|vmstart|vmshutdown|createpkg|addbox"
 	%exit%
 
 REM ###############################################
@@ -148,6 +151,12 @@ REM ###############################################
 REM # cretate vagrant package
 :createpkg
 	%VAGRANT% package --base "%VMNAME%"
+	%exit%
+
+REM ###############################################
+REM # add vagrant box
+:addbox
+	%VAGRANT% box add package.box --name "%VMNAME%"
 	%exit%
 
 REM ## EOF
