@@ -1,4 +1,4 @@
-// httpserver -i 0.0.0.0 -p 8080 -d ./osfonf/
+// httpserver -i 0.0.0.0 -p 8080 -d ./osconf/
 package main
 
 import (
