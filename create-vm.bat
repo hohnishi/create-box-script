@@ -78,12 +78,14 @@ REM ###############################################
 ::	echo "inst.ks=http://192.168.56.1:8080/ks.cfg"
 	echo inst.ks=http://10.0.2.2:8080/ks.cfg
 	echo wait until OS bootup
+	time /T
 	pause
 	time /T
 	call :additions
 	ssh %SSHOPT% -p 2222 vagrant@localhost "sudo mount /dev/sr0 /mnt ; sudo /mnt/VBoxLinuxAdditions.run ; sudo umount /mnt"
 	time /T
 	echo create and add box
+	time /T
 	pause
 	time /T
 	call :createpkg
